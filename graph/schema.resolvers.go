@@ -28,6 +28,16 @@ func (r *mutationResolver) CreateTodo(ctx context.Context, input model.NewTodo) 
 	return todo, nil
 }
 
+// Node is the resolver for the node field.
+func (r *queryResolver) Node(ctx context.Context, id string) (model.Node, error) {
+	for _, t := range r.todos {
+		if t.ID == id {
+			return t, nil
+		}
+	}
+	return model.Todo{}, nil
+}
+
 // Todos is the resolver for the todos field.
 func (r *queryResolver) Todos(ctx context.Context) ([]*model.Todo, error) {
 	return r.todos, nil
