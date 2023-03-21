@@ -17,10 +17,6 @@ func (r *mutationResolver) CreateTodo(ctx context.Context, input model.NewTodo) 
 		Text:   input.Text,
 		Done:   false,
 		UserID: input.UserID,
-		User: &model.User{
-			ID:   input.UserID,
-			Name: "user " + input.UserID,
-		},
 	}
 	r.todos = append(r.todos, todo)
 	return todo, nil
@@ -43,6 +39,7 @@ func (r *queryResolver) Todos(ctx context.Context) ([]*model.Todo, error) {
 
 // User is the resolver for the user field.
 func (r *todoResolver) User(ctx context.Context, obj *model.Todo) (*model.User, error) {
+	// get by userID
 	return &model.User{
 		ID:   obj.UserID,
 		Name: "user " + obj.UserID,
