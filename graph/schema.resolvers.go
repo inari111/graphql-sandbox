@@ -6,8 +6,6 @@ package graph
 
 import (
 	"context"
-	"fmt"
-	"math/rand"
 
 	"graphql-sandbox/graph/model"
 )
@@ -15,7 +13,7 @@ import (
 // CreateTodo is the resolver for the createTodo field.
 func (r *mutationResolver) CreateTodo(ctx context.Context, input model.NewTodo) (*model.Todo, error) {
 	todo := &model.Todo{
-		ID:     fmt.Sprintf("T%d", rand.Int()),
+		ID:     r.GlobalIDGenerator.Generate(model.ObjName, "00000000-0000-0000-0000-00000"),
 		Text:   input.Text,
 		Done:   false,
 		UserID: input.UserID,

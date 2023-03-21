@@ -1,10 +1,12 @@
 package main
 
 import (
-	"graphql-sandbox/graph"
 	"log"
 	"net/http"
 	"os"
+
+	"graphql-sandbox/graph"
+	"graphql-sandbox/graph/model"
 
 	"github.com/99designs/gqlgen/graphql/handler"
 	"github.com/99designs/gqlgen/graphql/playground"
@@ -18,7 +20,15 @@ func main() {
 		port = defaultPort
 	}
 
-	srv := handler.NewDefaultServer(graph.NewExecutableSchema(graph.Config{Resolvers: &graph.Resolver{}}))
+	srv := handler.NewDefaultServer(
+		graph.NewExecutableSchema(
+			graph.Config{
+				Resolvers: &graph.Resolver{
+					GlobalIDGenerator: model.NewGlobalIDGenerator(),
+				},
+			},
+		),
+	)
 
 	http.Handle("/", playground.Handler("GraphQL playground", "/query"))
 	http.Handle("/query", srv)
