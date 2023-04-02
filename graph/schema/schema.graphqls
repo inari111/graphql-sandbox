@@ -11,11 +11,6 @@ type User implements Node {
   name: String!
 }
 
-type Query {
-  node(id: ID!): Node
-  todos: [Todo!]!
-}
-
 type Mutation {
   createTodo(input: NewTodo!): Todo!
 }
