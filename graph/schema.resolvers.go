@@ -6,7 +6,6 @@ package graph
 
 import (
 	"context"
-
 	"graphql-sandbox/graph/model"
 )
 
