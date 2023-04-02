@@ -10,7 +10,3 @@ type User implements Node {
   id: ID!
   name: String!
 }
-
-type Mutation {
-  createTodo(input: NewTodo!): Todo!
-}
