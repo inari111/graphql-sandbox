@@ -5,8 +5,3 @@
 interface Node {
   id: ID!
 }
-
-type User implements Node {
-  id: ID!
-  name: String!
-}
